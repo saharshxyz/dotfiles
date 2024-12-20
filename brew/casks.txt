@@ -5,13 +5,10 @@ github
 google-chrome
 insomnia
 karabiner-elements
-libreoffice
-praat
-raspberry-pi-imager
 raycast
-rstudio
 shottr
 spotify
 sublime-text
 surfshark
+tailscale
 zoom
