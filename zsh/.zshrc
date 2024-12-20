@@ -67,6 +67,7 @@ alias {vi,vim}=nvim
 alias c=clear
 alias cat="bat -P"
 gcp() { git add .; git commit -m "$1"; git push }
+alias ghw="gh repo view --web"
 
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
