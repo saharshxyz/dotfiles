@@ -1,18 +1,15 @@
 #!/bin/bash
 
-# Create temporary copies of the original files
-cp packages.txt packages.txt.old
-cp casks.txt casks.txt.old
+timestamp=$(date +%Y%m%d_%H%M%S)
 
-# Sort the files in place
-sort -u -o packages.txt packages.txt
-sort -u -o casks.txt casks.txt
+for file in {packages,casks}.txt; do
+  base=${file%.*}
+  tmp="/tmp/${base}_${timestamp}.txt"
 
-# Show diffs
-echo "Changes in packages.txt:"
-diff packages.txt.old packages.txt
-echo -e "\nChanges in casks.txt:"
-diff casks.txt.old casks.txt
+  cp "$file" "$tmp"
+  sort -u -o "$file" "$file"
 
-# Clean up temporary files
-rm packages.txt.old casks.txt.old
+  echo "Changes from $tmp:"
+  diff "$tmp" "$file"
+  echo
+done
