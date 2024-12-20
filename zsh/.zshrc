@@ -61,7 +61,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias ls='eza --color=always --long --icons=always --no-time --no-user --no-permissions --hyperlink'
+alias ls='eza --color=always --long --no-time --no-user --no-permissions --hyperlink'
 alias lss='ls --total-size'
 alias vim='nvim'
 alias c='clear'
