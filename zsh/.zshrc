@@ -65,6 +65,7 @@ alias ls='eza --color=always --long --git --no-filesize --icons=always --no-time
 alias vim='nvim'
 alias c='clear'
 alias cat="bat -P"
+gcp() { git add . && git commit -m "$1" && git push }
 
 # Shell integrations
 eval "$(fzf --zsh)"

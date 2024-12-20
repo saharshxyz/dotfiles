@@ -1,0 +1,17 @@
+cap
+cursor
+font-jetbrains-mono-nerd-font
+github
+google-chrome
+insomnia
+karabiner-elements
+libreoffice
+praat
+raspberry-pi-imager
+raycast
+rstudio
+shottr
+spotify
+sublime-text
+surfshark
+zoom
