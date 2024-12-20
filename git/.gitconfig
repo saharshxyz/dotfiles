@@ -10,3 +10,5 @@
 	defaultBranch = master
 [core]
 	excludesfile = /Users/saharsh/.gitignore_global
+[push]
+	autoSetupRemote = true
