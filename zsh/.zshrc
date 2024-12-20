@@ -61,12 +61,12 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias ls='eza --color=always --long --no-time --no-user --no-permissions --hyperlink'
+alias ls='eza --color=always --long --no-{time,user,permissions} --hyperlink'
 alias lss='ls --total-size'
-alias vim='nvim'
-alias c='clear'
+alias {vi,vim}=nvim
+alias c=clear
 alias cat="bat -P"
-gcp() { git add . && git commit -m "$1" && git push }
+gcp() { git add .; git commit -m "$1"; git push }
 
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
