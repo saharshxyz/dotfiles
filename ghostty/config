@@ -1,0 +1,9 @@
+font-size = 16
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+term = "xterm-256color"
+window-width = 150
+window-height = 43
+keybind = global:cmd+ctrl+option+shift+t=toggle_quick_terminal
+confirm-close-surface = true

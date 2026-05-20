@@ -61,14 +61,26 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias ls='eza --color=always --long --no-{time,user,permissions} --hyperlink'
-alias lss='ls --total-size'
+alias ls='eza --no-{time,user,permissions} -a'
+alias lss='ls --total-size --long --icons'
 alias {vi,vim}=nvim
-alias c=clear
 alias cat="bat -P"
 gcp() { git add .; git commit -m "$1"; git push }
 alias ghw="gh repo view --web"
+alias cx=pbcopy
+alias ff=fastfetch
+alias sptest="speedtest --unit=auto-decimal-bits"
+alias cl="clear"
+alias c2p="code2prompt --hidden --include-priority --full-directory-tree --no-codeblock --output-format xml --output-file ~/Downloads/project.txt --encoding p50k"
+alias zj="zellij"
 
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
 eval $(thefuck --alias fk)
+
+# bun completions
+[ -s "/Users/saharsh/.bun/_bun" ] && source "/Users/saharsh/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

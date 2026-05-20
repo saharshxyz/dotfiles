@@ -59,7 +59,9 @@ create_symlinks() {
   stow_config "zsh"
   stow_config "git"
   stow_config "nvim" "$HOME/.config/nvim"
-  stow_config "yazi" "$HOME/.config/yazi/"
+  stow_config "yazi" "$HOME/.config/yazi"
+  stow_config "ghostty" "$HOME/.config/ghostty"
+  stow_config "fastfetch" "$HOME/.config/fastfetch/"
 }
 
 main() {
