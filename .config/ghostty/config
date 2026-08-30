@@ -1,0 +1,9 @@
+font-size = 16
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+term = "xterm-256color"
+window-width = 150
+window-height = 43
+confirm-close-surface = true
+tab-inherit-working-directory=false
