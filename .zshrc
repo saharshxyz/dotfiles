@@ -1,5 +1,7 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+export PATH="/opt/homebrew/opt/imagemagick-full/bin:$PATH"
+
 # Zinit — plugin manager
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -11,26 +13,43 @@ fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 
-# zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
+# zsh plugins — all deferred via turbo mode (wait lucid) in one call.
+# autosuggestions needs its own atload hook to start under turbo, so
+# it's listed with an inline ice override.
+zinit wait lucid for \
+    zsh-users/zsh-syntax-highlighting \
+    zsh-users/zsh-completions \
+    zsh-users/zsh-history-substring-search \
+    Aloxaf/fzf-tab \
+    atload"_zsh_autosuggest_start" \
+        zsh-users/zsh-autosuggestions
 
-# oh-my-zsh snippets
-zinit snippet OMZL::git.zsh
-zinit snippet OMZP::git
-zinit snippet OMZP::sudo
-zinit snippet OMZP::command-not-found
+# oh-my-zsh snippets — same deferred loading, one call
+zinit wait lucid for \
+    OMZL::git.zsh \
+    OMZP::git \
+    OMZP::sudo \
+    OMZP::command-not-found
 
 # Load completions (must come before zinit cdreplay)
-autoload -Uz compinit && compinit
+# Cache the completion dump and only regenerate once every 24h,
+# instead of doing a full fpath rescan on every shell startup.
+autoload -Uz compinit
+if [[ -n ${HOME}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 zinit cdreplay -q
 
 # Keybindings
+zmodload zsh/terminfo
+
 bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
+bindkey '^[[A' history-substring-search-up
+bindkey '^[OA' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^[OB' history-substring-search-down
 
 # History
 HISTSIZE=5000
@@ -40,9 +59,6 @@ HISTDUP=erase
 setopt appendhistory
 setopt sharehistory
 setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # Completion styling
@@ -50,7 +66,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --color=always --icons --group-directories-first $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --color=always --icons --group-directories-first $realpath'
 
 # Aliases
 alias ls='eza --no-{time,user,permissions} -a'
@@ -59,12 +74,11 @@ alias cat="bat -P"
 alias -g CP="| pbcopy"  # pipe output to clipboard, e.g. `git diff CP`
 
 # Auto-run ls on directory change
-autoload -Uz add-zsh-hook
-add-zsh-hook chpwd chpwd_ls
-
 chpwd_ls() {
     [[ -o interactive ]] && ls
 }
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd chpwd_ls
 
 # Shell integrations / prompt
 eval "$(oh-my-posh init zsh --config ~/.config/posh.toml)"
