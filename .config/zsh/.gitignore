@@ -1,0 +1,6 @@
+# Machine-local overrides
+local.zsh
+
+# Zinit-managed plugins / compiled files
+*.zwc
+.zcompdump*
