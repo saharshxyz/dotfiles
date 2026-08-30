@@ -7,8 +7,8 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 # Bootstrap zinit if not already installed
 if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+   mkdir -p "$(dirname "$ZINIT_HOME")"
+   git clone --depth=1 https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
@@ -55,11 +55,11 @@ bindkey '^[OB' history-substring-search-down
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
-HISTDUP=erase
 setopt appendhistory
 setopt sharehistory
 setopt hist_ignore_space
 setopt hist_find_no_dups
+setopt hist_ignore_all_dups
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -72,13 +72,6 @@ alias ls='eza --no-{time,user,permissions} -a'
 alias lss='ls --total-size --long --icons'
 alias cat="bat -P"
 alias -g CP="| pbcopy"  # pipe output to clipboard, e.g. `git diff CP`
-
-# Auto-run ls on directory change
-chpwd_ls() {
-    [[ -o interactive ]] && ls
-}
-autoload -Uz add-zsh-hook
-add-zsh-hook chpwd chpwd_ls
 
 # Shell integrations / prompt
 eval "$(oh-my-posh init zsh --config ~/.config/posh.toml)"
