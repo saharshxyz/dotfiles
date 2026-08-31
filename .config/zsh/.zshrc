@@ -77,8 +77,7 @@ zinit wait lucid for \
 zinit wait lucid for \
     OMZL::git.zsh \
     OMZP::git \
-    OMZP::sudo \
-    OMZP::command-not-found
+    OMZP::sudo
 
 # =========================================================
 # Completion
