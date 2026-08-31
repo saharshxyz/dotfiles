@@ -1,7 +1,9 @@
+theme = light:Material,dark:Ghostty Default Style Dark
 font-size = 16
 font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
+cursor-style = bar
 term = "xterm-256color"
 window-width = 150
 window-height = 43

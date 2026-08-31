@@ -160,3 +160,12 @@ alias -g CP="| pbcopy"          # pipe output to clipboard, e.g. `git diff CP`
 # =========================================================
 eval "$(oh-my-posh init zsh --config ~/.config/posh.toml)"
 eval "$(zoxide init --cmd cd zsh)"
+
+# =========================================================
+# Ghostty shell integration (manual — ZDOTDIR is set in
+# /etc/zshenv, which defeats Ghostty's automatic ZDOTDIR
+# trick, per https://github.com/ghostty-org/ghostty/blob/main/src/shell-integration/README.md)
+# =========================================================
+if [[ -n "$GHOSTTY_RESOURCES_DIR" ]]; then
+    source "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration"
+fi
