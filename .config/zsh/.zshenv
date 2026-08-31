@@ -22,6 +22,13 @@ elif command -v batcat >/dev/null 2>&1; then
   export MANPAGER="batcat -l man -p"
 fi
 
+# ---------- Terminal.app session resume ----------
+# Apple's shell integration writes window-restore state to
+# ${ZDOTDIR:-$HOME}/.zsh_sessions, ignoring XDG dirs entirely. Since
+# ZDOTDIR points into this repo, that would otherwise create a
+# generated/runtime directory inside version control.
+export SHELL_SESSIONS_DISABLE=1
+
 # ---------- GPG ----------
 # $TTY is a zsh builtin parameter, so this avoids forking `tty` on
 # every single shell startup the way `$(tty)` would.
