@@ -152,7 +152,9 @@ alias ls='eza --no-{time,user,permissions} -a'
 alias lss='ls --total-size --long --icons'
 alias cat="bat -P"
 alias -- -='cd -'               # `cd -` jumps to the previous directory
-alias -g CP="| pbcopy"          # pipe output to clipboard, e.g. `git diff CP`
+if (( $+commands[pbcopy] )); then
+    alias -g CP="| pbcopy"      # macOS clipboard, e.g. `git diff CP`
+fi
 
 # =========================================================
 # Shell integrations / prompt
